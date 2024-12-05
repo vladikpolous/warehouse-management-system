@@ -1,11 +1,15 @@
-FROM node:alpine
+FROM node:22-alpine
 
-WORKDIR /usr/src/app
+# Set the working directory
+WORKDIR /app
 
-COPY . /usr/src/app
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-RUN npm install -g @angular/cli
-
+# Install dependencies
 RUN npm install
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Copy all project files
+COPY . .
+
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
