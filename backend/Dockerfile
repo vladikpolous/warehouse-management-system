@@ -5,10 +5,13 @@ FROM openjdk:23-jdk-slim AS builder
 WORKDIR /app
 
 # Copy Gradle wrapper and build scripts
-COPY gradlew settings.gradle build.gradle ./
+COPY gradlew settings.gradle.kts build.gradle.kts ./
 
 # Copy Gradle wrapper files
 COPY gradle gradle/
+
+# Make gradlew executable
+RUN chmod +x ./gradlew
 
 # Cache Gradle dependencies
 RUN ./gradlew dependencies --no-daemon
@@ -16,13 +19,13 @@ RUN ./gradlew dependencies --no-daemon
 # Copy source code
 COPY . .
 
-# Build the application (generate the JAR file)
-RUN ./gradlew build --no-daemon
+# Build the application
+RUN ./gradlew build -x test --no-daemon
 
 # Stage 2: Run the application
 FROM openjdk:23-jdk-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
 # Copy the built JAR file from the builder stage

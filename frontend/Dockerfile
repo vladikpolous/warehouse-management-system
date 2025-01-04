@@ -13,4 +13,4 @@ RUN npm ci
 COPY . .
 
 # Run the Angular application
-CMD ["npx", "ng", "serve"]
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
