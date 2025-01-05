@@ -1,4 +1,3 @@
--- Create a role table
 CREATE TABLE roles
 (
     role_id          BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -6,7 +5,6 @@ CREATE TABLE roles
     role_description VARCHAR(255)
 );
 
--- Create a user table
 CREATE TABLE users
 (
     user_id      BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -18,7 +16,6 @@ CREATE TABLE users
     FOREIGN KEY (role_id) REFERENCES roles (role_id)
 );
 
--- Create a warehouse table
 CREATE TABLE warehouses
 (
     warehouse_id        BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -28,7 +25,6 @@ CREATE TABLE warehouses
     FOREIGN KEY (assigned_manager_id) REFERENCES users (user_id) ON DELETE SET NULL
 );
 
--- Create a table of product categories
 CREATE TABLE categories
 (
     category_id          BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -36,7 +32,6 @@ CREATE TABLE categories
     category_description VARCHAR(255)
 );
 
--- Create a product table
 CREATE TABLE products
 (
     product_id   BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -47,7 +42,6 @@ CREATE TABLE products
     FOREIGN KEY (category_id) REFERENCES categories (category_id)
 );
 
--- Create a table for accounting for goods in warehouses
 CREATE TABLE warehouse_products
 (
     warehouse_product_id BIGINT AUTO_INCREMENT PRIMARY KEY,
