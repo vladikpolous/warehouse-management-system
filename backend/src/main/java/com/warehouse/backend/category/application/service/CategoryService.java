@@ -1,0 +1,56 @@
+package com.warehouse.backend.category.application.service;
+
+import com.warehouse.backend.category.application.mapper.CategoryMapper;
+import com.warehouse.backend.category.application.port.input.CreateCategoryRequest;
+import com.warehouse.backend.category.application.port.output.CategoryDto;
+import com.warehouse.backend.category.domain.exception.CategoryNotFoundException;
+import com.warehouse.backend.category.domain.model.Category;
+import com.warehouse.backend.category.domain.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@Transactional
+public class CategoryService {
+
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+        this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
+    }
+
+    public List<CategoryDto> findAll() {
+        return categoryRepository.findAll().stream().map(categoryMapper::categoryToCategoryDto)
+                .collect(Collectors.toList());
+    }
+
+    public CategoryDto getCategoryById(Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+        return categoryMapper.categoryToCategoryDto(category);
+    }
+
+    public CategoryDto saveCategory(CreateCategoryRequest category) {
+        Category newCategory = categoryRepository.save(categoryMapper.createCategoryRequestToCategory(category));
+        return categoryMapper.categoryToCategoryDto(newCategory);
+    }
+
+    public CategoryDto updateCategory(CreateCategoryRequest createCategoryRequest, Long id) {
+        Category existingCategory = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+        existingCategory.setName(createCategoryRequest.getName());
+        existingCategory.setDescription(createCategoryRequest.getDescription());
+        return categoryMapper.categoryToCategoryDto(categoryRepository.save(existingCategory));
+    }
+
+    public void deleteCategoryById(Long id) {
+        if (categoryRepository.findById(id).isPresent()) {
+            categoryRepository.deleteById(id);
+        } else {
+            throw new CategoryNotFoundException(id);
+        }
+    }
+}
