@@ -30,24 +30,24 @@ public class CategoryService {
     }
 
     public CategoryDto getCategoryById(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+        Category category = categoryRepository.getCategoryById(id).orElseThrow(() -> new CategoryNotFoundException(id));
         return categoryMapper.categoryToCategoryDto(category);
     }
 
     public CategoryDto saveCategory(CreateCategoryRequest category) {
-        Category newCategory = categoryRepository.save(categoryMapper.createCategoryRequestToCategory(category));
+        Category newCategory = categoryRepository.createNewCategory(categoryMapper.createCategoryRequestToCategory(category));
         return categoryMapper.categoryToCategoryDto(newCategory);
     }
 
     public CategoryDto updateCategory(CreateCategoryRequest createCategoryRequest, Long id) {
-        Category existingCategory = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+        Category existingCategory = categoryRepository.getCategoryById(id).orElseThrow(() -> new CategoryNotFoundException(id));
         existingCategory.setName(createCategoryRequest.getName());
         existingCategory.setDescription(createCategoryRequest.getDescription());
-        return categoryMapper.categoryToCategoryDto(categoryRepository.save(existingCategory));
+        return categoryMapper.categoryToCategoryDto(categoryRepository.createNewCategory(existingCategory));
     }
 
     public void deleteCategoryById(Long id) {
-        if (categoryRepository.findById(id).isPresent()) {
+        if (categoryRepository.getCategoryById(id).isPresent()) {
             categoryRepository.deleteById(id);
         } else {
             throw new CategoryNotFoundException(id);
