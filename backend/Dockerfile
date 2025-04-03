@@ -20,7 +20,7 @@ RUN ./gradlew dependencies --no-daemon
 COPY . .
 
 # Build the application
-RUN ./gradlew build -x test --no-daemon
+RUN ./gradlew build --no-daemon
 
 # Stage 2: Run the application
 FROM openjdk:23-jdk-slim

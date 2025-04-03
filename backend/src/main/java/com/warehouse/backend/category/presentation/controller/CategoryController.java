@@ -25,12 +25,12 @@ public class CategoryController {
     @GetMapping
     @Operation(summary = "Get all categories")
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.findAll());
+        return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get certain category by ID")
-    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
 
@@ -42,13 +42,13 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Change category information")
-    public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long id, @RequestBody CreateCategoryRequest createCategoryRequest) {
+    public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id, @RequestBody CreateCategoryRequest createCategoryRequest) {
         return ResponseEntity.ok(categoryService.updateCategory(createCategoryRequest, id));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete category by ID")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteCategoryById(id);
         return ResponseEntity.noContent().build();
     }
