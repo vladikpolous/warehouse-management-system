@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface CategoryRepository {
 
-    List<Category> findAll();
+    List<Category> getAllCategories();
 
     Optional<Category> getCategoryById(Long id);
 
     Category createNewCategory(Category category);
 
-    void deleteById(Long id);
+    void deleteCategoryById(Long id);
 }

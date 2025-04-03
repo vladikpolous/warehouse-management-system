@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -24,9 +23,10 @@ public class CategoryService {
         this.categoryMapper = categoryMapper;
     }
 
-    public List<CategoryDto> findAll() {
-        return categoryRepository.findAll().stream().map(categoryMapper::categoryToCategoryDto)
-                .collect(Collectors.toList());
+    public List<CategoryDto> getAllCategories() {
+        return categoryRepository.getAllCategories().stream()
+                .map(categoryMapper::categoryToCategoryDto)
+                .toList();
     }
 
     public CategoryDto getCategoryById(Long id) {
@@ -48,7 +48,7 @@ public class CategoryService {
 
     public void deleteCategoryById(Long id) {
         if (categoryRepository.getCategoryById(id).isPresent()) {
-            categoryRepository.deleteById(id);
+            categoryRepository.deleteCategoryById(id);
         } else {
             throw new CategoryNotFoundException(id);
         }
