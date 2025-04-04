@@ -93,4 +93,32 @@ class JpaCategoryRepositoryTest {
         jpaCategoryRepository.deleteCategoryById(999L);
         assertThat(jpaCategoryRepository.getAllCategories()).isEmpty();
     }
+
+    @Test
+    void testIsCategoryExist_WhenCategoryExists() {
+        jpaCategoryRepository.createNewCategory(testCategory);
+
+        boolean exists = jpaCategoryRepository.isCategoryExist(testCategory.getName());
+
+        assertThat(exists).isTrue();
+    }
+
+    @Test
+    void testIsCategoryExist_WhenCategoryDoesNotExist() {
+        String nonExistentCategoryName = "Non-existent category";
+
+        boolean exists = jpaCategoryRepository.isCategoryExist(nonExistentCategoryName);
+
+        assertThat(exists).isFalse();
+    }
+
+    @Test
+    void testIsCategoryExist_CaseInsensitive() {
+        jpaCategoryRepository.createNewCategory(testCategory);
+        String uppercaseName = testCategory.getName().toUpperCase();
+
+        boolean exists = jpaCategoryRepository.isCategoryExist(uppercaseName);
+
+        assertThat(exists).isTrue();
+    }
 }

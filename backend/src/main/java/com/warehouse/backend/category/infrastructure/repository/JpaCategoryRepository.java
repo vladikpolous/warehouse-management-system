@@ -3,6 +3,8 @@ package com.warehouse.backend.category.infrastructure.repository;
 import com.warehouse.backend.category.domain.model.Category;
 import com.warehouse.backend.category.domain.repository.CategoryRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +31,6 @@ public interface JpaCategoryRepository extends CategoryRepository, JpaRepository
         findById(id).ifPresent(this::delete);
     }
 
+    @Query("SELECT COUNT(c) > 0 FROM Category c WHERE LOWER(c.name) = LOWER(:name)")
+    boolean isCategoryExist(@Param("name") String name);
 }

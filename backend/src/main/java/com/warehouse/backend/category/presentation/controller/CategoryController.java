@@ -57,7 +57,9 @@ public class CategoryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Category created successfully",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CategoryDto.class)))
+                            schema = @Schema(implementation = CategoryDto.class))),
+            @ApiResponse(responseCode = "409", description = "Category with this name already exists",
+                    content = @Content)
     })
     public ResponseEntity<CategoryDto> createCategory(@RequestBody CreateCategoryRequest categoryDto) {
         CategoryDto createdCategory = categoryService.saveCategory(categoryDto);
@@ -71,6 +73,8 @@ public class CategoryController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = CategoryDto.class))),
             @ApiResponse(responseCode = "404", description = "Category not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "409", description = "Category with this name already exists",
                     content = @Content)
     })
     public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id, @RequestBody CreateCategoryRequest createCategoryRequest) {

@@ -14,4 +14,6 @@ public interface CategoryRepository {
     Category createNewCategory(Category category);
 
     void deleteCategoryById(Long id);
+
+    boolean isCategoryExist(String name);
 }
