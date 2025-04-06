@@ -17,9 +17,6 @@ class CategoryExceptionHandlerTest {
     @InjectMocks
     private CategoryExceptionHandler categoryExceptionHandler;
 
-    @InjectMocks
-    private CategoryController categoryController;
-
     @Test
     void handleCategoryNotFoundException_ShouldReturnNotFoundStatus() {
         Long categoryId = 1L;
