@@ -34,9 +34,11 @@ public class CategoryService {
     @Cacheable(value = "allCategories", key = "'list'")
     public List<CategoryDto> getAllCategories() {
         logger.info("Getting all categories");
-        return categoryRepository.getAllCategories().stream()
+        List<CategoryDto> categories = categoryRepository.getAllCategories().stream()
                 .map(categoryMapper::categoryToCategoryDto)
                 .toList();
+        logger.info("Successfully retrieved {} categories", categories.size());
+        return categories;
     }
 
     @Cacheable(value = "categoryById", key = "#root.args[0]")
