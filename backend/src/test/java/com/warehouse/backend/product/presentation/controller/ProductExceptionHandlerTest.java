@@ -26,6 +26,7 @@ class ProductExceptionHandlerTest {
         ResponseEntity<ErrorResponse> response = productExceptionHandler.handleProductNotFoundException(exception);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().getMessage()).isEqualTo("Product with ID " + productId + " not found.");
     }
 
@@ -37,6 +38,7 @@ class ProductExceptionHandlerTest {
         ResponseEntity<ErrorResponse> response = productExceptionHandler.handleProductAlreadyExistsException(exception);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().getMessage()).isEqualTo("Product with name '" + productName + "' already exists");
     }
 }
