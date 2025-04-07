@@ -12,7 +12,7 @@ public class TestConfig {
     @Bean
     @Primary
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("allCategories", "categoryById");
+        return new ConcurrentMapCacheManager("allCategories", "categoryById", "allProducts", "productById");
     }
 
 }
