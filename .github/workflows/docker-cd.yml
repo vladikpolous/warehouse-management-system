@@ -4,6 +4,12 @@ on:
   push:
     branches: [ main ]
     tags: [ 'v*.*.*' ]
+  workflow_run:
+    workflows: ["Backend CI", "Frontend CI"]
+    types:
+      - completed
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -25,7 +31,7 @@ jobs:
       id: meta-backend
       uses: docker/metadata-action@v4
       with:
-        images: yourusername/warehouse-backend
+        images: vladyslavxxxx/warehouse-backend
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
@@ -39,14 +45,14 @@ jobs:
         push: true
         tags: ${{ steps.meta-backend.outputs.tags }}
         labels: ${{ steps.meta-backend.outputs.labels }}
-        cache-from: type=registry,ref=yourusername/warehouse-backend:buildcache
-        cache-to: type=registry,ref=yourusername/warehouse-backend:buildcache,mode=max
+        cache-from: type=registry,ref=vladyslavxxxx/warehouse-backend:buildcache
+        cache-to: type=registry,ref=vladyslavxxxx/warehouse-backend:buildcache,mode=max
 
     - name: Extract metadata (tags, labels) for Frontend
       id: meta-frontend
       uses: docker/metadata-action@v4
       with:
-        images: yourusername/warehouse-frontend
+        images: vladyslavxxxx/warehouse-frontend
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
@@ -60,5 +66,5 @@ jobs:
         push: true
         tags: ${{ steps.meta-frontend.outputs.tags }}
         labels: ${{ steps.meta-frontend.outputs.labels }}
-        cache-from: type=registry,ref=yourusername/warehouse-frontend:buildcache
-        cache-to: type=registry,ref=yourusername/warehouse-frontend:buildcache,mode=max
+        cache-from: type=registry,ref=vladyslavxxxx/warehouse-frontend:buildcache
+        cache-to: type=registry,ref=vladyslavxxxx/warehouse-frontend:buildcache,mode=max
