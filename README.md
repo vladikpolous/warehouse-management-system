@@ -1,5 +1,6 @@
 # Warehouse Management System
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/vladikpolous/warehouse-management-system)](https://github.com/vladikpolous/warehouse-management-system/releases)
 [![Backend CI](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/backend-ci.yml)
 [![Frontend CI](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/frontend-ci.yml)
 [![Docker CD](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/docker-cd.yml/badge.svg)](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/docker-cd.yml)
@@ -79,6 +80,4 @@ This project uses GitHub Actions for continuous integration and deployment:
 - **Backend CI**: Automatically builds and tests the backend code when changes are pushed
 - **Frontend CI**: Automatically builds and tests the frontend code when changes are pushed
 - **Docker CD**: Builds and pushes Docker images to Docker Hub when new tags are created
-- **Deploy**: Automatically deploys the application to the production server after successful Docker builds
-
-The CI/CD pipeline ensures code quality and simplifies the deployment process.
+****
