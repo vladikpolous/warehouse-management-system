@@ -1,8 +1,8 @@
 # Warehouse Management System
 
-![Backend CI](https://github.com/yourusername/warehouse-management-system/actions/workflows/backend-ci.yml/badge.svg)
-![Frontend CI](https://github.com/yourusername/warehouse-management-system/actions/workflows/frontend-ci.yml/badge.svg)
-![Docker CD](https://github.com/yourusername/warehouse-management-system/actions/workflows/docker-cd.yml/badge.svg)
+[![Backend CI](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/backend-ci.yml)
+[![Frontend CI](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/frontend-ci.yml)
+[![Docker CD](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/docker-cd.yml/badge.svg)](https://github.com/vladikpolous/warehouse-management-system/actions/workflows/docker-cd.yml)
 
 A comprehensive warehouse management solution built with Spring Boot and Angular, designed to efficiently manage inventory, products, categories, and warehouse operations. This project implements CI/CD using GitHub Actions for automated testing, building, and deployment.
 
