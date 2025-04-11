@@ -1,0 +1,26 @@
+# Database configuration
+spring.datasource.url=${SPRING_DATASOURCE_URL}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# Flyway configuration
+spring.flyway.locations=classpath:db/migration
+spring.flyway.schemas=warehouse
+spring.flyway.table=flyway_migration_history
+
+# Redis configuration
+spring.data.redis.host=${REDIS_HOST:localhost}
+spring.data.redis.port=${REDIS_PORT:6379}
+
+# Server configuration
+server.port=${PORT:8080}
+
+# Logging configuration
+logging.level.root=INFO
+logging.level.com.warehouse.backend=DEBUG
+logging.pattern.console=%clr(%d{yyyy-MM-dd HH:mm:ss}){magenta} %clr(%5p) %clr([%thread]){faint} %clr(%logger{0}){cyan} : %m%n
